@@ -5,17 +5,20 @@ export default {
   name: "PlantList",
   components: {PlantItem},
   props: {
-    plantList: {
+    plants: {
       type: Array,
       required: true
     }
+  },
+  created() {
+    console.log(this.plants);
   }
 }
 </script>
 
 <template>
   <div class="plant-list">
-    <plant-item v-for="(plant, index) in plantList" :plant="plant" :key="plant.id"></plant-item>
+    <plant-item v-for="(plant, index) in plants" :plant="plant" :key="plant.id"></plant-item>
   </div>
 </template>
 

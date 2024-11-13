@@ -32,7 +32,7 @@ export default {
     </div>
 
     <div class="filter-bar__check">
-      <label for="favoritesOnly">Show only favorites</label>
+      <label for="favoritesOnly">Favorite</label>
       <input type="checkbox" v-model="showOnlyFavorites" id="favoritesOnly" >
     </div>
   </div>

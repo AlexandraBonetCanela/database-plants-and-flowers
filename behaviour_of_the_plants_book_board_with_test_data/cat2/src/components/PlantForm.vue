@@ -21,7 +21,6 @@ export default {
 
 <template>
   <div class="plant-form__form">
-    <h2>Add a new Plant</h2>
     <form class="plant-form__form">
 
       <div class="plant-form__form-group">
@@ -81,7 +80,7 @@ export default {
       </div>
 
       <div class="plant-form__form-group plant-form__form-group--actions">
-        <button type="submit" class="plant-form__submit">Add plant</button>
+        <button type="submit" class="plant-form__submit" id="submitButton" name="submitButton">Add plant</button>
       </div>
     </form>
   </div>
