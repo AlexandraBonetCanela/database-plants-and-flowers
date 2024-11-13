@@ -5,7 +5,20 @@ export default {
 </script>
 
 <template>
-
+  <div class="modal">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <slot name="header"></slot>
+        <button class="modal__close">
+          <img src="@/assets/close-button.svg" alt="Button Image"/>
+        </button>
+      </div>
+      <div class="modal__body">
+        <slot name="body"></slot>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
