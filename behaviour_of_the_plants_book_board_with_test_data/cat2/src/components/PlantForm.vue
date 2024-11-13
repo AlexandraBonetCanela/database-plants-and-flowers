@@ -1,11 +1,90 @@
 <script>
 export default {
-  name: "PlantForm"
+  name: "PlantForm",
+  data(){
+    return {
+      name: "",
+      description: "",
+      imageURL: "",
+      date: null,
+      family: "",
+      genus: "",
+      species: "",
+      labels: "",
+      favorite: false,
+      rating: 3,
+      personalNote: ""
+    };
+  }
 }
 </script>
 
 <template>
+  <div class="plant-form__form">
+    <h2>Add a new Plant</h2>
+    <form class="plant-form__form">
 
+      <div class="plant-form__form-group">
+        <label for="name">Name</label>
+        <input type="text" v-model="name" id="name" name="name" />
+      </div>
+
+
+      <div class="plant-form__form-group">
+        <label for="description">Description</label>
+        <input type="text" v-model="description" id="description" name="description"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="imageURL">Image URL</label>
+        <input type="text" v-model="imageURL" id="imageURL" name="imageURL"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="date">Date</label>
+        <input type="date" v-model="date" id="date" name="date"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="family">Family</label>
+        <input type="text" v-model="family" id="family" name="family"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="genus">Genus</label>
+        <input type="text" v-model="genus" id="genus" name="genus"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="species">Species</label>
+        <input type="text" v-model="species" id="species" name="species"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="labels">Labels</label>
+        <input type="text" v-model="labels" id="labels" name="labels"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="favorite">Favorite</label>
+        <input type="checkbox" v-model="favorite" id="favorite" name="favorite"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="rating">Rating</label>
+        <input type="range" v-model="rating" id="rating" name="rating" min="1" max="5"/>
+      </div>
+
+      <div class="plant-form__form-group">
+        <label for="personalNote">Personal Note</label>
+        <textarea v-model="personalNote" id="personalNote" name="personalNote"></textarea>
+      </div>
+
+      <div class="plant-form__form-group plant-form__form-group--actions">
+        <button type="submit" class="plant-form__submit">Add plant</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <style scoped>
