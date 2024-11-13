@@ -72,7 +72,6 @@ export default {
           <span v-for="(label, index) in plant.labels" :key="index">{{label}}</span>
         </p>
       </div>
-
     </div>
   </div>
 </template>
