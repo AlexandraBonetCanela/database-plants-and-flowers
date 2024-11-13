@@ -1,11 +1,41 @@
 <script>
 export default {
-  name: "FilterBar"
+  name: "FilterBar",
+  data(){
+    return{
+      selectedSortBy: 'name',
+      selectedSortedOrder: 'asc',
+      showOnlyFavorites: false
+    };
+  }
 }
 </script>
 
 <template>
+  <div class="filter-bar">
+    <div class="filter-bar__select">
+      <label for="sortBy">Sort by</label>
+      <select v-model="selectedSortBy" id="sortBy">
+        <option value="name">Name</option>
+        <option value="date">Date</option>
+        <option value="family">Family</option>
+        <option value="rating">Rating</option>
+      </select>
+    </div>
 
+    <div class="filter-bar__select">
+      <label for="orderBy">Order by</label>
+      <select v-model="selectedSortedOrder" id="orderBy">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+
+    <div class="filter-bar__check">
+      <label for="favoritesOnly">Show only favorites</label>
+      <input type="checkbox" v-model="showOnlyFavorites" id="favoritesOnly" >
+    </div>
+  </div>
 </template>
 
 <style scoped>
