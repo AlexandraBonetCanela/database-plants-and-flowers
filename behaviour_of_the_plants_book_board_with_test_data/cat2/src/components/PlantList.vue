@@ -10,9 +10,6 @@ export default {
       required: true
     }
   },
-  created() {
-    console.log(this.plants);
-  }
 }
 </script>
 
