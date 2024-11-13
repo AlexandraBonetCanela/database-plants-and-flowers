@@ -1,10 +1,29 @@
 <script>
 export default {
-  name: "SearchBar"
+  name: "SearchBar",
+  data(){
+    return {
+      text: ""
+    };
+  },
+  methods: {
+    clear() {
+      this.text = '';
+    },
+    addPlant(){
+
+    }
+  }
+
 }
 </script>
 
 <template>
+  <div class="search-bar">
+    <input v-model="text" placeholder="Search plant"/>
+    <button class="clear" @click="clear">Clear</button>
+    <button class="add" @click="addPlant">Add plant</button>
+  </div>
 
 </template>
 
