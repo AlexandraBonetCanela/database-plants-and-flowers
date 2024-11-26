@@ -8,7 +8,7 @@
   <SearchBar />
   <FilterBar />
   <main class="main">
-    <PlantList :plants="plants" />
+    <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
   </main>
   <ModalLayer v-if="showModal">
     <template v-slot:header>
@@ -123,6 +123,11 @@ export default {
       ],
     };
   },
+  methods: {
+    handleDeletePlant(id){
+      this.plants = this.plants.filter((plant) => plant.id !== id);
+    }
+  }
 };
 </script>
 

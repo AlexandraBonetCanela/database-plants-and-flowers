@@ -2,7 +2,7 @@ import BookItem from './BookItem.vue';
 
 <template>
   <div class="plant-list">
-    <PlantItem v-for="plant in plants" :plant="plant" />
+    <PlantItem v-for="plant in plants" :plant="plant" @delete-plant="handleDeletePlant" />
   </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
       required: true,
     },
   },
+  methods: {
+    handleDeletePlant(id){
+      this.$emit("delete-plant", id)
+    }
+  }
 };
 </script>
 

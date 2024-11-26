@@ -1,6 +1,6 @@
 <template>
   <div class="plant-item" :class="plant.favorite && 'plant-item--favourite'">
-    <button class="plant-item__delete">
+    <button class="plant-item__delete" @click="deletePlant(plant.id)">
       <img src="../assets/delete-button.svg" alt="Delete book" />
     </button>
     <div class="plant-item__image">
@@ -68,6 +68,12 @@ export default {
       required: true,
     },
   },
+  methods: {
+    deletePlant(id) {
+      this.$emit("delete-plant", id);
+    }
+
+  }
 };
 </script>
 
