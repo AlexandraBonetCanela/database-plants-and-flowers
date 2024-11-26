@@ -5,7 +5,7 @@
       <h1 class="title">Plants Book</h1>
     </div>
   </header>
-  <SearchBar />
+  <SearchBar @show-form="toggleForm" />
   <FilterBar />
   <main class="main">
     <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
@@ -126,6 +126,9 @@ export default {
   methods: {
     handleDeletePlant(id){
       this.plants = this.plants.filter((plant) => plant.id !== id);
+    },
+    toggleForm() {
+      this.showModal = !this.showModal;
     }
   }
 };

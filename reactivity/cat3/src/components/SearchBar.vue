@@ -2,9 +2,20 @@
   <div class="search-bar">
     <input type="text" placeholder="Search plant" />
     <button type="button" class="clear">Clear</button>
-    <button type="button" class="add">Add Plant</button>
+    <button type="button" class="add" @click="showForm">Add Plant</button>
   </div>
 </template>
+
+<script>
+export default {
+  name: "SearchBar",
+  methods: {
+    showForm() {
+      this.$emit("show-form");
+    }
+  }
+}
+</script>
 
 <style scoped>
 .search-bar {
