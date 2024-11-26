@@ -4,7 +4,7 @@
     <div class="modal__content">
       <div class="modal__header">
         <slot name="header"></slot>
-        <button type="button" class="modal__close">
+        <button type="button" class="modal__close" @click="closeModal">
           <img src="../assets/close-button.svg" />
         </button>
       </div>
@@ -14,6 +14,18 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    closeModal(){
+      this.$emit("close-modal");
+    }
+  }
+
+}
+</script>
+
 <style scoped>
 .modal {
   position: fixed;

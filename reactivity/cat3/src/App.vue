@@ -10,7 +10,7 @@
   <main class="main">
     <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
   </main>
-  <ModalLayer v-if="showModal">
+  <ModalLayer v-if="showModal" @close-modal="toggleForm">
     <template v-slot:header>
       <h2>Add a new Plant</h2>
     </template>
