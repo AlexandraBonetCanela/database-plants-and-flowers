@@ -15,7 +15,8 @@
       <h2>Add a new Plant</h2>
     </template>
     <template v-slot:body>
-      <BookForm />
+      <PlantForm></PlantForm>
+      <!--<BookForm /> -->
     </template>
   </ModalLayer>
 </template>
