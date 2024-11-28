@@ -22,7 +22,6 @@ export default {
       this.$emit("close-modal");
     }
   }
-
 }
 </script>
 
