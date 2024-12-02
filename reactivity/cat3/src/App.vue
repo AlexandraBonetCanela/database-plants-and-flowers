@@ -9,7 +9,7 @@
   <div v-if="searchTerm">
     A search is in progress
   </div>
-  <FilterBar />
+  <FilterBar @sort-items="sortItems" @order-items="orderItems" @favourite-items="favouriteItems"/>
   <main class="main">
     <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
   </main>
@@ -43,6 +43,9 @@ export default {
     return {
       showModal: false,
       searchTerm: '',
+      sortBy: '',
+      orderBy: '',
+      favouriteItems: '',
       plants: [
         {
           id: "1",
@@ -140,6 +143,15 @@ export default {
     },
     handleSearch(searchItem){
       this.searchTerm = searchItem;
+    },
+    sortItems(sortByValue){
+      this.sortBy = sortByValue;
+    },
+    orderItems(orderByValue){
+      this.orderBy = orderByValue;
+    },
+    favouriteItems(favourite){
+      this.favouriteItems = favourite;
     }
   }
 };

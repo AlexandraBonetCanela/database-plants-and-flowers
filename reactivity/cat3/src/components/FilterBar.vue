@@ -2,7 +2,7 @@
   <div class="filter-bar">
     <div class="filter-bar__select">
       <label for="sort">Sort by</label>
-      <select>
+      <select v-model="sortByValue" @input="sortBy">
         <option value="title">Title</option>
         <option value="author">Author</option>
         <option value="year">Year</option>
@@ -19,13 +19,13 @@
     </div>
     <div class="filter-bar__select">
       <label for="sort">Sort by</label>
-      <select>
+      <select v-model="orderByValue" @input="orderBy">
         <option value="asc">Ascending</option>
         <option value="desc">Descending</option>
       </select>
     </div>
     <div class="filter-bar__check">
-      <input type="checkbox" id="favorite" />
+      <input type="checkbox" id="favorite" v-model="favorite" @change="favourite" />
       <label for="favorite">Favorite</label>
     </div>
   </div>
@@ -34,7 +34,25 @@
 <script>
 export default {
   name: "FilterBar",
-};
+  data() {
+    return {
+      sortByValue: 'title',
+      orderByValue: 'asc',
+      favorite: false
+    }
+  },
+  methods: {
+    sortBy(){
+      this.$emit("sort-items", this.sortByValue);
+    },
+    orderBy(){
+      this.$emit("order-items", this.orderByValue);
+    },
+    favourite(){
+      this.$emit("favourite-items", this.favorite)
+    }
+  }
+}
 </script>
 
 <style scoped>
