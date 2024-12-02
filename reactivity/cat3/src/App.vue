@@ -5,7 +5,10 @@
       <h1 class="title">Plants Book</h1>
     </div>
   </header>
-  <SearchBar @show-form="toggleForm" />
+  <SearchBar @show-form="toggleForm" @search="handleSearch"/>
+  <div v-if="searchTerm" class="error-message">
+    A search is in progress {{this.searchItem}}
+  </div>
   <FilterBar />
   <main class="main">
     <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
@@ -39,6 +42,7 @@ export default {
   data() {
     return {
       showModal: false,
+      searchTerm: '',
       plants: [
         {
           id: "1",
@@ -133,6 +137,9 @@ export default {
     createPlant(newPlant){
       this.plants.push(newPlant);
       this.toggleForm();
+    },
+    handleSearch(searchItem){
+      this.searchTerm = searchItem;
     }
   }
 };

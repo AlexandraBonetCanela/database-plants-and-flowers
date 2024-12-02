@@ -1,7 +1,7 @@
 <template>
   <div class="search-bar">
-    <input type="text" placeholder="Search plant" />
-    <button type="button" class="clear">Clear</button>
+    <input v-model="searchItem" type="text" placeholder="Search plant" @input="search" />
+    <button type="button" class="clear" @click="clearSearch">Clear</button>
     <button type="button" class="add" @click="showForm">Add Plant</button>
   </div>
 </template>
@@ -9,9 +9,20 @@
 <script>
 export default {
   name: "SearchBar",
+  data() {
+    return{
+      searchItem: ''
+    }
+  },
   methods: {
     showForm() {
       this.$emit("show-form");
+    },
+    clearSearch(){
+      this.searchItem = '';
+    },
+    search(){
+      this.$emit("search", this.searchItem);
     }
   }
 }
