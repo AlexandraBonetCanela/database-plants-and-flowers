@@ -6,8 +6,8 @@
     </div>
   </header>
   <SearchBar @show-form="toggleForm" @search="handleSearch"/>
-  <div v-if="searchTerm" class="error-message">
-    A search is in progress {{this.searchItem}}
+  <div v-if="searchTerm">
+    A search is in progress
   </div>
   <FilterBar />
   <main class="main">
