@@ -15,8 +15,7 @@
       <h2>Add a new Plant</h2>
     </template>
     <template v-slot:body>
-      <PlantForm></PlantForm>
-      <!--<BookForm /> -->
+      <PlantForm @create-plant="createPlant"></PlantForm>
     </template>
   </ModalLayer>
 </template>
@@ -130,6 +129,10 @@ export default {
     },
     toggleForm() {
       this.showModal = !this.showModal;
+    },
+    createPlant(newPlant){
+      this.plants.push(newPlant);
+      this.toggleForm();
     }
   }
 };

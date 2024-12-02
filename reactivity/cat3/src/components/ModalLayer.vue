@@ -16,11 +16,17 @@
 </template>
 
 <script>
+import PlantForm from "@/components/PlantForm.vue";
+
 export default {
+  name: "ModalLayer",
+  components: {
+    PlantForm,
+  },
   methods: {
     closeModal(){
       this.$emit("close-modal");
-    }
+    },
   }
 }
 </script>
