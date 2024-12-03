@@ -5,20 +5,20 @@
       <h1 class="title">Plants Book</h1>
     </div>
   </header>
-  <SearchBar @show-form="toggleForm" @search="handleSearch"/>
+  <SearchBar @show-form="toggleForm" @search="setSearchTerm"/>
   <div v-if="searchTerm">
     A search is in progress
   </div>
   <FilterBar @sort-items="sortItems" @order-items="orderItems" @favourite-items="favouriteItems"/>
   <main class="main">
-    <PlantList :plants="plants" @delete-plant="handleDeletePlant" />
+    <PlantList :plants="plantListFiltered" @delete-plant="deletePlant" />
   </main>
   <ModalLayer v-if="showModal" @close-modal="toggleForm">
     <template v-slot:header>
       <h2>Add a new Plant</h2>
     </template>
     <template v-slot:body>
-      <PlantForm @create-plant="createPlant"></PlantForm>
+      <PlantForm @create-plant="addPlant"></PlantForm>
     </template>
   </ModalLayer>
 </template>
@@ -43,9 +43,9 @@ export default {
     return {
       showModal: false,
       searchTerm: '',
-      sortBy: '',
-      orderBy: '',
-      favouriteItems: '',
+      sortBy: 'title',
+      orderBy: 'asc',
+      favouriteItems: false,
       plants: [
         {
           id: "1",
@@ -130,18 +130,46 @@ export default {
       ],
     };
   },
+  computed: {
+    plantListFiltered(){
+      let filteredPlants = [...this.plants];
+
+      if(this.searchTerm){
+        filteredPlants = filteredPlants.filter((plant)=>
+          [plant.name, plant.description, ...plant.labels].some((field) =>
+            field.toLowerCase().includes(this.searchTerm.toLowerCase())
+          )
+        );
+      }
+
+      if (this.favouriteItems){
+        filteredPlants = filteredPlants.filter((plant)=>
+        plant.favorite);
+      }
+
+      filteredPlants.sort((a,b) => {
+        const aConst = a[this.sortBy];
+        const bConst = b[this.sortBy];
+        if(aConst < bConst) return this.orderBy === 'asc' ? -1 : 1;
+        if(bConst < aConst) return this.orderBy === 'desc' ? -1 : 1;
+        return 0;
+      });
+
+      return filteredPlants;
+    },
+  },
   methods: {
-    handleDeletePlant(id){
+    deletePlant(id){
       this.plants = this.plants.filter((plant) => plant.id !== id);
     },
     toggleForm() {
       this.showModal = !this.showModal;
     },
-    createPlant(newPlant){
+    addPlant(newPlant){
       this.plants.push(newPlant);
       this.toggleForm();
     },
-    handleSearch(searchItem){
+    setSearchTerm(searchItem){
       this.searchTerm = searchItem;
     },
     sortItems(sortByValue){
@@ -152,7 +180,7 @@ export default {
     },
     favouriteItems(favourite){
       this.favouriteItems = favourite;
-    }
+    },
   }
 };
 </script>
