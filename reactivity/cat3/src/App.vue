@@ -9,7 +9,10 @@
   <div v-if="searchTerm">
     A search is in progress
   </div>
-  <FilterBar @sort-items="sortItems" @order-items="orderItems" @favourite-items="favouriteItems"/>
+  <FilterBar
+      @sort-items="sortItems"
+      @order-items="orderItems"
+      @favourite-items="favouriteItems"/>
   <main class="main">
     <PlantList :plants="plantListFiltered" @delete-plant="deletePlant" />
   </main>
@@ -132,7 +135,9 @@ export default {
   },
   computed: {
     plantListFiltered(){
+      console.log('Computing plantListFiltered...');
       let filteredPlants = [...this.plants];
+      console.log('Initial plants:', filteredPlants);
 
       if(this.searchTerm){
         filteredPlants = filteredPlants.filter((plant)=>
@@ -147,12 +152,28 @@ export default {
         plant.favorite);
       }
 
+      const orderBy = this.orderBy;
+      const sortBy = this.sortBy;
+
       filteredPlants.sort((a,b) => {
-        const aConst = a[this.sortBy];
-        const bConst = b[this.sortBy];
-        if(aConst < bConst) return this.orderBy === 'asc' ? -1 : 1;
-        if(bConst < aConst) return this.orderBy === 'desc' ? -1 : 1;
-        return 0;
+        const aConst = a[sortBy] !== undefined ? a[sortBy] : '';
+        const bConst = b[sortBy] !== undefined ? b[sortBy] : '';
+
+        console.log('Sorting:', { sortBy, orderBy, aConst, bConst });
+
+        if (typeof aConst === 'number' && bConst === 'number'){
+           if (this.orderBy === 'asc') {
+             return aConst - bConst;
+          } else {
+             return bConst - aConst;
+           }
+        }
+
+        const aString = (aConst || '').toString().toLowerCase();
+        const bString = (bConst || '').toString().toLowerCase();
+        return this.orderBy === 'asc'
+            ? aString.localeCompare(bString)
+            : bString.localeCompare(aString);
       });
 
       return filteredPlants;
@@ -176,6 +197,7 @@ export default {
       this.sortBy = sortByValue;
     },
     orderItems(orderByValue){
+      console.log('OrderBy received:', orderByValue);
       this.orderBy = orderByValue;
     },
     favouriteItems(favourite){

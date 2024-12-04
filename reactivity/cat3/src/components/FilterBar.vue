@@ -3,9 +3,9 @@
     <div class="filter-bar__select">
       <label for="sort">Sort by</label>
       <select v-model="sortByValue" @input="sortBy">
-        <option value="title">Title</option>
+        <option value="name">Title</option>
         <option value="author">Author</option>
-        <option value="year">Year</option>
+        <option value="date">Year</option>
         <option value="pages">Pages</option>
         <option value="genre">Genre</option>
         <option value="editorial">Editorial</option>
@@ -36,7 +36,7 @@ export default {
   name: "FilterBar",
   data() {
     return {
-      sortByValue: 'title',
+      sortByValue: 'name',
       orderByValue: 'asc',
       favorite: false
     }
@@ -44,8 +44,10 @@ export default {
   methods: {
     sortBy(){
       this.$emit("sort-items", this.sortByValue);
+      console.log("SortBy emitted: " + this.sortByValue)
     },
     orderBy(){
+      console.log("OrderBy emitted: " + this.orderByValue)
       this.$emit("order-items", this.orderByValue);
     },
     favourite(){
