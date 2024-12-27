@@ -1,0 +1,81 @@
+<template>
+  <div class="filter-bar">
+    <div class="filter-bar__select">
+      <label for="sort">Sort by</label>
+      <select v-model="sortBy">
+        <option value="name">Name</option>
+        <option value="date">Date</option>
+        <option value="family">Family</option>
+        <option value="rating">Rating</option>
+      </select>
+    </div>
+    <div class="filter-bar__select">
+      <label for="sort">Sort by</label>
+      <select v-model="orderBy">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+    <div class="filter-bar__check">
+      <input type="checkbox" id="favorite" v-model="favourite" />
+      <label for="favorite">Favorite Only</label>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "FilterBar",
+  data: () => ({
+    sortBy: "name",
+    orderBy: "asc",
+    favourite: false,
+  }),
+  watch: {
+    sortBy() {
+      console.log(this.sortBy);
+      this.$emit("sort-items", this.sortBy);
+    },
+    orderBy() {
+      this.$emit("order-items", this.orderBy);
+    },
+    favourite() {
+      this.$emit("favourite-items", this.favourite);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.filter-bar {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ccc;
+}
+.filter-bar__select {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.filter-bar__select label {
+  margin-right: 10px;
+}
+.filter-bar__select select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+.filter-bar__check {
+  display: flex;
+  align-items: center;
+}
+.filter-bar__check input {
+  margin-right: 10px;
+}
+.filter-bar__check label {
+  cursor: pointer;
+}
+</style>
